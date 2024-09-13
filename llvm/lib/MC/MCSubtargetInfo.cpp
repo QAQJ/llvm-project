@@ -208,6 +208,11 @@ static FeatureBitset getFeatures(StringRef CPU, StringRef TuneCPU, StringRef FS,
 
 void MCSubtargetInfo::InitMCProcessorInfo(StringRef CPU, StringRef TuneCPU,
                                           StringRef FS) {
+  #if 1
+  if (TargetTriple.getArch() == llvm::Triple::cpu0 ||
+      TargetTriple.getArch() == llvm::Triple::cpu0el)
+    Cpu0DisableUnreconginizedMessage = true;
+  #endif
   FeatureBits = getFeatures(CPU, TuneCPU, FS, ProcDesc, ProcFeatures);
   FeatureString = std::string(FS);
 
